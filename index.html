@@ -1,23 +1,24 @@
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-  </head>
-  <body>
-    <!-- ※1 a-scene に mindar-image 属性を追加しマーカーファイル（.mindファイル）のパスを記載-->
-    <a-scene mindar-image="imageTargetSrc: ./hiro.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <a-asset-item id="vroid" src="./untitled02_Rumba Dancing.glb"></a-asset-item>
-        <a-asset-item id="pose" src="./pose03.glb"></a-asset-item>
-      </a-assets>	    
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <!-- ※2 mindar-image-target 属性をつけることでマーカーと対応するentityを作れる -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model rotation="0 0 0" position="0 0 0" height="2" width="2" src="#vroid" animation-mixer></a-gltf-model>
-      </a-entity>
+</head>
+
+<body>
+    <a-scene embedded arjs="debugUIEnabled:false;" renderer="gammaOutput: true;" vr-mode-ui="enabled: false">
+        <a-assets>
+            <a-asset-item id="model" src="./untitled02_Rumba Dancing.glb"></a-asset-item>
+        </a-assets>
+
+        <a-marker type="pattern" url="./pattern-qrcode_amaiebi.github.io.patt">
+        <a-entity scale="100 100 100" position="0 0.4 -3" animation-mixer="clip:*" gltf-model="#model" visible="true">
+        </a-entity>
+
+        <a-light type="ambient" color="#ffffff"></a-light>
+        <a-light type="point" intensity="2" position="0 4 0"></a-light>
     </a-scene>
-  </body>
+</body>
+
 </html>
